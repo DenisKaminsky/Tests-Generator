@@ -23,15 +23,16 @@ namespace TestsGeneratorLib
             {
                 MaxDegreeOfParallelism = _config._maxReadTasksCount
             };
-            ExecutionDataflowBlockOptions processingBlockOptions = new ExecutionDataflowBlockOptions
+            ExecutionDataflowBlockOptions processBlockOptions = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = _config._maxProcessingTasksCount
             };
-            ExecutionDataflowBlockOptions writeOptions = new ExecutionDataflowBlockOptions
+            ExecutionDataflowBlockOptions writeBlockOptions = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = _config._maxWriteTasksCount
             };
 
+            TransformBlock<string,string> readBlock = new TransformBlock<string, string>(new Func)
 
 
         }
