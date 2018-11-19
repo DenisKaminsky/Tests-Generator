@@ -19,9 +19,17 @@ namespace TestsGeneratorLib
 
             foreach (ClassInfo classInfo in parsingResult.Classes)
             {
-
+                
             }
             return generationResult;
+        }
+
+        private NamespaceDeclarationSyntax GetNamespaceDeclaration(ClassInfo classInfo)
+        {
+            NamespaceDeclarationSyntax namespaceDeclaration = NamespaceDeclaration(QualifiedName(
+                IdentifierName(classInfo.NamespaceName), IdentifierName("Tests")));
+
+            return namespaceDeclaration;
         }
     }
 }
