@@ -15,6 +15,23 @@ namespace TestsGeneratorLib.DataStructures
         {
             SyntaxTree codeTree = CSharpSyntaxTree.ParseText(sourceCode);
             CompilationUnitSyntax root = codeTree.GetCompilationUnitRoot();
+
+            return new ResultStructure();
+        }
+
+        public List<ClassInfo> GetClasses(CompilationUnitSyntax root)
+        {
+            string className,namespaceName;
+            List<ClassInfo> classes = new List<ClassInfo>();
+
+            foreach (ClassDeclarationSyntax classDeclaration in root.DescendantNodes().OfType<ClassDeclarationSyntax>())
+            {
+                namespaceName = ((NamespaceDeclarationSyntax)classDeclaration.Parent).Name.ToString();//namespace
+                className = classDeclaration.Identifier.ValueText;//имя класса
+
+                classes.Add(new ClassInfo());
+            }
+            return classes;
         }
     }
 }
