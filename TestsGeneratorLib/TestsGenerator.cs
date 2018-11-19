@@ -32,8 +32,9 @@ namespace TestsGeneratorLib
                 MaxDegreeOfParallelism = _config._maxWriteTasksCount
             };
 
-            TransformBlock<string,string> readBlock = new TransformBlock<string, string>(new Func)
-
+            TransformBlock<string, string> readBlock = new TransformBlock<string, string>(new Func<string, Task<string>>(AsyncReader.Read), readBlockOptions);
+            //TransformBlock<> processBlock;
+            //ActionBlock<> writeBlock;
 
         }
 
