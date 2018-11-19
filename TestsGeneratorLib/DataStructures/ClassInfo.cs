@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TestsGeneratorLib.DataStructures
 {
@@ -10,16 +6,17 @@ namespace TestsGeneratorLib.DataStructures
     {
         private string _name;
 
-        public List<> methods { get; }
+        public List<MethodInfo> methods { get; }
 
         public string Name
         {
             get { return _name; }
         }
 
-        public ClassInfo(string className)
+        public ClassInfo(string className, List<MethodInfo> methods)
         {
             _name = className;
+            this.methods = methods;
         }
     }
 }
