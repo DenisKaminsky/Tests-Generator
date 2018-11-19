@@ -16,7 +16,7 @@ namespace TestsGeneratorLib.DataStructures
             SyntaxTree codeTree = CSharpSyntaxTree.ParseText(sourceCode);
             CompilationUnitSyntax root = codeTree.GetCompilationUnitRoot();
 
-            return new ResultStructure();
+            return new ResultStructure(GetClasses(root));
         }
 
         public List<ClassInfo> GetClasses(CompilationUnitSyntax root)

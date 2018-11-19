@@ -5,6 +5,7 @@ namespace TestsGeneratorLib.DataStructures
     public class ClassInfo
     {
         private string _name;
+        private string _namespaceName;
 
         public List<MethodInfo> methods { get; }
 
@@ -13,9 +14,15 @@ namespace TestsGeneratorLib.DataStructures
             get { return _name; }
         }
 
-        public ClassInfo(string className, List<MethodInfo> methods)
+        public string NamespaceName
+        {
+            get { return _name; }
+        }
+
+        public ClassInfo(string className,string namespaceName, List<MethodInfo> methods)
         {
             _name = className;
+            _namespaceName = namespaceName;
             this.methods = methods;
         }
     }
