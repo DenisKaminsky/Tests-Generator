@@ -29,9 +29,25 @@ namespace TestsGeneratorLib.DataStructures
                 namespaceName = ((NamespaceDeclarationSyntax)classDeclaration.Parent).Name.ToString();//namespace
                 className = classDeclaration.Identifier.ValueText;//имя класса
 
-                classes.Add(new ClassInfo());
+                classes.Add(new ClassInfo(className,namespaceName,GetMethods(classDeclaration)));
             }
             return classes;
         }
+
+        public List<MethodInfo> GetMethods(ClassDeclarationSyntax classDeclaration)
+        {
+            string methodName;
+            List<MethodInfo> methods = new List<MethodInfo>();
+
+            //только public методы
+            foreach (MethodDeclarationSyntax methodDeclaration in classDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .Where((methodDeclaration) => methodDeclaration.Modifiers.Any((modifier) => modifier.IsKind(SyntaxKind.PublicKeyword))))
+            {
+                methodName = methodDeclaration.Identifier.ValueText;//имя метода
+                methods.Add(new MethodInfo(methodName));
+            }
+            return methods;
+        }
+
     }
 }
