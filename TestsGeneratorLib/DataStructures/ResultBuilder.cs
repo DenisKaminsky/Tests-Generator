@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -19,7 +16,7 @@ namespace TestsGeneratorLib.DataStructures
             return new ResultStructure(GetClasses(root));
         }
 
-        public List<ClassInfo> GetClasses(CompilationUnitSyntax root)
+        private List<ClassInfo> GetClasses(CompilationUnitSyntax root)
         {
             string className,namespaceName;
             List<ClassInfo> classes = new List<ClassInfo>();
@@ -34,7 +31,7 @@ namespace TestsGeneratorLib.DataStructures
             return classes;
         }
 
-        public List<MethodInfo> GetMethods(ClassDeclarationSyntax classDeclaration)
+        private List<MethodInfo> GetMethods(ClassDeclarationSyntax classDeclaration)
         {
             string methodName;
             List<MethodInfo> methods = new List<MethodInfo>();

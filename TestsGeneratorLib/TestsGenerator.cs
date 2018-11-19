@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
+using TestsGeneratorLib.DataStructures;
 
 namespace TestsGeneratorLib
 {
@@ -36,6 +37,14 @@ namespace TestsGeneratorLib
             //TransformBlock<> processBlock;
             //ActionBlock<> writeBlock;
 
+        }
+
+        private void GenerateTestClass(string sourceCode)
+        {
+            ResultBuilder builder = new ResultBuilder();
+            ResultStructure result = builder.GetResult(sourceCode);
+
+            //here we can genearte test class with result
         }
 
     }
