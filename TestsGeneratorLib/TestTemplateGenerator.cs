@@ -13,16 +13,15 @@ namespace TestsGeneratorLib
 {
     public class TestTemplateGenerator
     {
-        private ParsingResultStructure _parsingResult;
-
-        public TestTemplateGenerator(ParsingResultStructure parsingResult)
+        public List<GeneratedTest> GetTestTemplates(ParsingResultStructure parsingResult)
         {
-            _parsingResult = parsingResult;
-        }
+            List<GeneratedTest> generationResult = new List<GeneratedTest>();
 
-        public void GetTestTemplates()
-        {
+            foreach (ClassInfo classInfo in parsingResult.Classes)
+            {
 
+            }
+            return generationResult;
         }
     }
 }

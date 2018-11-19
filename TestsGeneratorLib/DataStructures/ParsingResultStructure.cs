@@ -4,11 +4,11 @@ namespace TestsGeneratorLib.DataStructures
 {    
     public class ParsingResultStructure
     {
-        public List<ClassInfo> classes { get; }
+        public List<ClassInfo> Classes { get; }
 
         public ParsingResultStructure(List<ClassInfo> classes)
         {
-            this.classes = classes;
+            this.Classes = classes;
         }
     }
 }

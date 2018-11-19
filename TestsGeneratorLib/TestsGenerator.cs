@@ -17,7 +17,7 @@ namespace TestsGeneratorLib
             _config = config;
         }
 
-        public Task Generate()
+        public Task Generate(string path)
         {
             DataflowLinkOptions linkOptions = new DataflowLinkOptions { PropagateCompletion = true };//цель получает уведомление о завершении/сбое
             ExecutionDataflowBlockOptions readBlockOptions = new ExecutionDataflowBlockOptions
