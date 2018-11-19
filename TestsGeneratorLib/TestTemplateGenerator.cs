@@ -20,6 +20,9 @@ namespace TestsGeneratorLib
             _parsingResult = parsingResult;
         }
 
+        public void GetTestTemplates()
+        {
 
+        }
     }
 }
