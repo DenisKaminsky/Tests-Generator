@@ -10,6 +10,8 @@ namespace TestsGeneratorLib.DataStructures
     {
         private string _name;
 
+        public List<> methods { get; }
+
         public string Name
         {
             get { return _name; }
