@@ -41,9 +41,8 @@ namespace TestsGeneratorLib
 
         private void GenerateTestClass(string sourceCode)
         {
-            ResultBuilder builder = new ResultBuilder();
-            ResultStructure result = builder.GetResult(sourceCode);
-
+            ParsingResultBuilder builder = new ParsingResultBuilder();
+            ParsingResultStructure result = builder.GetResult(sourceCode);
             //here we can genearte test class with result
         }
 

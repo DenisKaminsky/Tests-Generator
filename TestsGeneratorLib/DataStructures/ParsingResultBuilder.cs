@@ -6,14 +6,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace TestsGeneratorLib.DataStructures
 {
-    public class ResultBuilder
+    public class ParsingResultBuilder
     {
-        public ResultStructure GetResult(string sourceCode)
+        public ParsingResultStructure GetResult(string sourceCode)
         {
             SyntaxTree codeTree = CSharpSyntaxTree.ParseText(sourceCode);
             CompilationUnitSyntax root = codeTree.GetCompilationUnitRoot();
 
-            return new ResultStructure(GetClasses(root));
+            return new ParsingResultStructure(GetClasses(root));
         }
 
         private List<ClassInfo> GetClasses(CompilationUnitSyntax root)
