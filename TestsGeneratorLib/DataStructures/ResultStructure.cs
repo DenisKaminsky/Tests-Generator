@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestsGeneratorLib.ResultStructures
+namespace TestsGeneratorLib.DataStructures
 {
     
     public class ResultStructure
