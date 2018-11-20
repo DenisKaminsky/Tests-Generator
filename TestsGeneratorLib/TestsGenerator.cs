@@ -17,7 +17,7 @@ namespace TestsGeneratorLib
             _config = config;
         }
 
-        public Task Generate(string path)
+        public Task Generate(List<string> pathes)
         {
             DataflowLinkOptions linkOptions = new DataflowLinkOptions { PropagateCompletion = true };//цель получает уведомление о завершении/сбое
             ExecutionDataflowBlockOptions readBlockOptions = new ExecutionDataflowBlockOptions
@@ -40,7 +40,10 @@ namespace TestsGeneratorLib
             readBlock.LinkTo(processBlock, linkOptions);
             processBlock.LinkTo(writeBlock, linkOptions);
 
-            readBlock.SendAsync(path);
+            foreach (string path in pathes)
+            {
+                readBlock.SendAsync(path);
+            }
             readBlock.Complete();
 
             return writeBlock.Completion;

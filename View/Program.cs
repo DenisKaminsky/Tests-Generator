@@ -14,11 +14,15 @@ namespace View
             int readingLimit = 3;
             int writingLimit = 3;
             int processingLimit = 8;
-            string path = @"D:\files\BaseGenerator.cs";
+            List<string> pathes = new List<string>();
+
+            pathes.Add(@"D:\files\BaseGenerator.cs");
+            pathes.Add(@"D:\files\TestsGenerator.cs");
+
             TestsGeneratorConfig config = new TestsGeneratorConfig(readingLimit, processingLimit, writingLimit);
             TestsGenerator generator = new TestsGenerator(config);
 
-            generator.Generate(path).Wait();
+            generator.Generate(pathes).Wait();
             Console.WriteLine("Complete");
         }
     }
