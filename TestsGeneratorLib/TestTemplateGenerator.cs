@@ -23,7 +23,12 @@ namespace TestsGeneratorLib
                     .WithUsings(GetUsingDeclarations(classInfo))
                     .WithMembers(SingletonList<MemberDeclarationSyntax>(GetNamespaceDeclaration(classInfo)
                         .WithMembers(SingletonList<MemberDeclarationSyntax>(ClassDeclaration(classInfo.Name + "Tests")
-                            .WithAttributeLists(...)
+                            .WithAttributeLists(
+                                SingletonList<AttributeListSyntax>(
+                                    AttributeList(
+                                        SingletonSeparatedList<AttributeSyntax>(
+                                            Attribute(
+                                                IdentifierName("TestClass")))) ))
                             .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword)))
                             .WithMembers(...)))
                         )
@@ -55,17 +60,30 @@ namespace TestsGeneratorLib
             return usings;
         }
 
+        private AttributeListSyntax GetAttributesDeclarations()
+        {
+            AttributeListSyntax attributes = AttributeList(
+                SingletonSeparatedList<AttributeSyntax>(
+                    Attribute(
+                        IdentifierName("TestClass"))));
+
+            return attributes;
+        }
+
         private SyntaxList<MemberDeclarationSyntax> GetMembersDeclarations(ClassInfo classInfo)
         {
             SyntaxList<MemberDeclarationSyntax> methods = new SyntaxList<MemberDeclarationSyntax>();
 
             foreach (MethodInfo method in classInfo.Methods)
             {
-                methods.Add();
+                methods.Add(GetMethodDeclaration(method));
             }
             return methods;
         }
 
-        private 
+        private MethodDeclarationSyntax GetMethodDeclaration(MethodInfo method)
+        {
+
+        }
     }
 }
