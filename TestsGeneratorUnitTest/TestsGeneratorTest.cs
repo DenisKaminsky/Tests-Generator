@@ -34,9 +34,16 @@ namespace TestsGeneratorUnitTest
         }
 
         [TestMethod]
-        public void ()
+        public void UsingDeclarationsTest()
         {
-
+            Assert.AreEqual("System", _root.Usings[0].Name.ToString());
+            Assert.AreEqual("System.Collections.Generic", _root.Usings[1].Name.ToString());
+            Assert.AreEqual("System.Linq", _root.Usings[2].Name.ToString());
+            Assert.AreEqual("System.Text", _root.Usings[3].Name.ToString());
+            Assert.AreEqual("Microsoft.VisualStudio.TestTools.UnitTesting", _root.Usings[4].Name.ToString());
+            Assert.AreEqual("TestsGenerator", _root.Usings[5].Name.ToString());
         }
+
+
     }
 }
