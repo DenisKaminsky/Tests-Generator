@@ -60,12 +60,12 @@ namespace TestsGeneratorLib
             return usings;
         }
 
-        private AttributeListSyntax GetAttributesDeclarations()
+        private AttributeListSyntax GetAttributesDeclarations(string identifier)
         {
             AttributeListSyntax attributes = AttributeList(
                 SingletonSeparatedList<AttributeSyntax>(
                     Attribute(
-                        IdentifierName("TestClass"))));
+                        IdentifierName(identifier))));
 
             return attributes;
         }
@@ -83,13 +83,29 @@ namespace TestsGeneratorLib
 
         private MethodDeclarationSyntax GetMethodDeclaration(MethodInfo method)
         {
+            MethodDeclarationSyntax methodDeclaration;
             List<StatementSyntax> bodyMembers = new List<StatementSyntax>();
 
             bodyMembers.Add(
                 ExpressionStatement(
                     InvocationExpression(
                         GetAssertFail())
-                    .WithArgumentList(GetMemberArgs())));                        
+                    .WithArgumentList(GetMemberArgs())));
+
+            methodDeclaration = MethodDeclaration(
+                PredefinedType(
+                    Token(SyntaxKind.VoidKeyword)),
+                Identifier(method.Name))
+                .WithAttributeLists(
+                    SingletonList(
+                        AttributeList(
+                            SingletonSeparatedList(
+                                Attribute(
+                                    IdentifierName("TestMethod"))))))
+                .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword)))
+                .WithBody(Block(bodyMembers));
+
+            return methodDeclaration;       
         }
 
         private MemberAccessExpressionSyntax GetAssertFail()
