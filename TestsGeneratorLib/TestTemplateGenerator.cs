@@ -19,7 +19,12 @@ namespace TestsGeneratorLib
 
             foreach (ClassInfo classInfo in parsingResult.Classes)
             {
-                
+                CompilationUnitSyntax unit = CompilationUnit()
+                    .WithUsings(GetUsingDeclarations(classInfo))
+                    .WithMembers(SingletonList<MemberDeclarationSyntax>(GetNamespaceDeclaration(classInfo)
+                        .WithMembers(SingletonList<MemberDeclarationSyntax>(ClassDeclaration(classInfo.Name+"Tests")
+                        )))
+                    
             }
             return generationResult;
         }
@@ -32,9 +37,9 @@ namespace TestsGeneratorLib
             return namespaceDeclaration;
         }
 
-        private List<UsingDirectiveSyntax> GetUsingDeclarations(ClassInfo classInfo)
+        private SyntaxList<UsingDirectiveSyntax> GetUsingDeclarations(ClassInfo classInfo)
         {
-            List<UsingDirectiveSyntax> usings = new List<UsingDirectiveSyntax>();
+            SyntaxList<UsingDirectiveSyntax> usings = new SyntaxList<UsingDirectiveSyntax>();
 
             usings.Add(UsingDirective(IdentifierName("System")));
             usings.Add(UsingDirective(IdentifierName("System.Collections.Generic")));
