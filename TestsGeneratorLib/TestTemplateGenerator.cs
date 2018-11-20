@@ -31,5 +31,19 @@ namespace TestsGeneratorLib
 
             return namespaceDeclaration;
         }
+
+        private List<UsingDirectiveSyntax> GetUsingDeclarations(ClassInfo classInfo)
+        {
+            List<UsingDirectiveSyntax> usings = new List<UsingDirectiveSyntax>();
+
+            usings.Add(UsingDirective(IdentifierName("System")));
+            usings.Add(UsingDirective(IdentifierName("System.Collections.Generic")));
+            usings.Add(UsingDirective(IdentifierName("System.Linq")));
+            usings.Add(UsingDirective(IdentifierName("System.Text")));
+            usings.Add(UsingDirective(IdentifierName("Microsoft.VisualStudio.TestTools.UnitTesting")));
+            usings.Add(UsingDirective(IdentifierName(classInfo.NamespaceName)));
+
+            return usings;
+        }
     }
 }
