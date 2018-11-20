@@ -61,6 +61,8 @@ namespace TestsGeneratorUnitTest
 
             Assert.AreEqual(1, classes.Count());
             Assert.AreEqual("TestsGeneratorTests", classes.ElementAt<ClassDeclarationSyntax>(0).Identifier.ToString());
+            Assert.AreEqual(1, classes.ElementAt<ClassDeclarationSyntax>(0).AttributeLists.Count);
+            Assert.AreEqual("TestClass", classes.ElementAt<ClassDeclarationSyntax>(0).AttributeLists[0].Attributes[0].Name.ToString());
         }
 
         [TestMethod]
