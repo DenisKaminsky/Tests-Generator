@@ -86,6 +86,14 @@ namespace TestsGeneratorUnitTest
             MethodAttributesTest(methods.ElementAt<MethodDeclarationSyntax>(2));
         }
 
+        [TestMethod]
+        public void AssertFailTest()
+        {
+            IEnumerable<MethodDeclarationSyntax> methods = _root.DescendantNodes().OfType<MethodDeclarationSyntax>();
+            int actual = methods.ElementAt<MethodDeclarationSyntax>(0).Body.Statements.OfType<ExpressionStatementSyntax>().Where((statement) => statement.ToString().Contains("Assert.Fail")).Count();
+            Assert.AreEqual(1, actual);
+        }
+
 
     }
 }
