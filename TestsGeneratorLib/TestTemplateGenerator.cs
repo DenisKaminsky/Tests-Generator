@@ -22,8 +22,12 @@ namespace TestsGeneratorLib
                 CompilationUnitSyntax unit = CompilationUnit()
                     .WithUsings(GetUsingDeclarations(classInfo))
                     .WithMembers(SingletonList<MemberDeclarationSyntax>(GetNamespaceDeclaration(classInfo)
-                        .WithMembers(SingletonList<MemberDeclarationSyntax>(ClassDeclaration(classInfo.Name+"Tests")
-                        )))
+                        .WithMembers(SingletonList<MemberDeclarationSyntax>(ClassDeclaration(classInfo.Name + "Tests")
+                            .WithAttributeLists(...)
+                            .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword)))
+                            .WithMembers(...)))
+                        )
+                     );
                     
             }
             return generationResult;
