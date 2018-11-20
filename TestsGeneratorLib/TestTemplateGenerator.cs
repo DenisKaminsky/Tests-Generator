@@ -30,10 +30,11 @@ namespace TestsGeneratorLib
                                             Attribute(
                                                 IdentifierName("TestClass")))) ))
                             .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword)))
-                            .WithMembers(...)))
+                            .WithMembers(GetMembersDeclarations(classInfo))))
                         )
                      );
-                    
+
+                                    
             }
             return generationResult;
         }
@@ -97,9 +98,9 @@ namespace TestsGeneratorLib
                     Token(SyntaxKind.VoidKeyword)),
                 Identifier(method.Name))
                 .WithAttributeLists(
-                    SingletonList(
+                    SingletonList<AttributeListSyntax>(
                         AttributeList(
-                            SingletonSeparatedList(
+                            SingletonSeparatedList<AttributeSyntax>(
                                 Attribute(
                                     IdentifierName("TestMethod"))))))
                 .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword)))
