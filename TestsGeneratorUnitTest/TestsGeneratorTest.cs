@@ -63,6 +63,17 @@ namespace TestsGeneratorUnitTest
             Assert.AreEqual("TestsGeneratorTests", classes.ElementAt<ClassDeclarationSyntax>(0).Identifier.ToString());
         }
 
+        [TestMethod]
+        public void MethodsTest()
+        {
+            IEnumerable<MethodDeclarationSyntax> methods = _root.DescendantNodes().OfType<MethodDeclarationSyntax>();
+
+            Assert.AreEqual(3, methods.Count());
+            Assert.AreEqual("GenerateTest", methods.ElementAt<MethodDeclarationSyntax>(0).Identifier.ToString());
+            Assert.AreEqual("Method1Test", methods.ElementAt<MethodDeclarationSyntax>(1).Identifier.ToString());
+            Assert.AreEqual("Method2Test", methods.ElementAt<MethodDeclarationSyntax>(2).Identifier.ToString());
+        }
+
 
     }
 }
