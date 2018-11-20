@@ -1,23 +1,25 @@
 ﻿using System.IO;
 using System.Collections.Generic;
-using TestsGeneratorLib;
-using TestsGeneratorLib.DataStructures;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestsGeneratorLib;
 
 namespace TestsGeneratorUnitTest
 {
     [TestClass]
     public class TestsGeneratorTest
     {
-        private ParsingResultStructure _result;
+        private CompilationUnitSyntax _root;
 
         [TestInitialize]
         public void SetUp()
         {
             int readingLimit = 3, writingLimit = 3, processingLimit = 8;
-            string sourceCode;            
+            string sourceCode;
+            SyntaxTree codeTree;
             List<string> pathes = new List<string>();
-            ParsingResultBuilder builder;
             TestsGeneratorConfig config;
             TestsGenerator generator;
 
@@ -26,13 +28,13 @@ namespace TestsGeneratorUnitTest
             generator = new TestsGenerator(config);
             generator.Generate(pathes,"D:\\files\\Tests").Wait();
 
-            sourceCode = File.ReadAllText("D:\\files\\Tests\\TestsGeneratorTest");
-            builder = new ParsingResultBuilder();
-            _result = builder.GetResult(sourceCode);
+            sourceCode = File.ReadAllText("D:\\files\\Tests\\TestsGeneratorTest.cs");
+            codeTree = CSharpSyntaxTree.ParseText(sourceCode);
+            _root = codeTree.GetCompilationUnitRoot();
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void ()
         {
 
         }
