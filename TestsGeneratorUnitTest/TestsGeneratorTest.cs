@@ -54,6 +54,15 @@ namespace TestsGeneratorUnitTest
             Assert.AreEqual("TestsGenerator.Tests", namespaces.ElementAt<NamespaceDeclarationSyntax>(0).Name.ToString());
         }
 
+        [TestMethod]
+        public void ClassTest()
+        {
+            IEnumerable<ClassDeclarationSyntax> classes = _root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+
+            Assert.AreEqual(1, classes.Count());
+            Assert.AreEqual("TestsGeneratorTests", classes.ElementAt<ClassDeclarationSyntax>(0).Identifier.ToString());
+        }
+
 
     }
 }
