@@ -65,6 +65,13 @@ namespace TestsGeneratorUnitTest
             Assert.AreEqual("TestClass", classes.ElementAt<ClassDeclarationSyntax>(0).AttributeLists[0].Attributes[0].Name.ToString());
         }
 
+        public void MethodAttributesTest(MethodDeclarationSyntax method)
+        {
+            Assert.AreEqual(1, method.AttributeLists.Count);
+            Assert.AreEqual(1, method.AttributeLists[0].Attributes.Count);
+            Assert.AreEqual("TestMethod", method.AttributeLists[0].Attributes[0].Name.ToString());
+        }
+
         [TestMethod]
         public void MethodsTest()
         {
@@ -72,8 +79,11 @@ namespace TestsGeneratorUnitTest
 
             Assert.AreEqual(3, methods.Count());
             Assert.AreEqual("GenerateTest", methods.ElementAt<MethodDeclarationSyntax>(0).Identifier.ToString());
+            MethodAttributesTest(methods.ElementAt<MethodDeclarationSyntax>(0));
             Assert.AreEqual("Method1Test", methods.ElementAt<MethodDeclarationSyntax>(1).Identifier.ToString());
+            MethodAttributesTest(methods.ElementAt<MethodDeclarationSyntax>(1));
             Assert.AreEqual("Method2Test", methods.ElementAt<MethodDeclarationSyntax>(2).Identifier.ToString());
+            MethodAttributesTest(methods.ElementAt<MethodDeclarationSyntax>(2));
         }
 
 
