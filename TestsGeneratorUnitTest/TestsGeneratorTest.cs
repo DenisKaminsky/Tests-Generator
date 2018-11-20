@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Linq;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -42,6 +43,15 @@ namespace TestsGeneratorUnitTest
             Assert.AreEqual("System.Text", _root.Usings[3].Name.ToString());
             Assert.AreEqual("Microsoft.VisualStudio.TestTools.UnitTesting", _root.Usings[4].Name.ToString());
             Assert.AreEqual("TestsGenerator", _root.Usings[5].Name.ToString());
+        }
+
+        [TestMethod]
+        public void NamespaceDeclarationsTest()
+        {
+            IEnumerable<NamespaceDeclarationSyntax>  namespaces = _root.DescendantNodes().OfType<NamespaceDeclarationSyntax>();
+
+            Assert.AreEqual(1, namespaces.Count());
+            Assert.AreEqual("TestsGenerator.Tests", namespaces.ElementAt<NamespaceDeclarationSyntax>(0).Name.ToString());
         }
 
 
