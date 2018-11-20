@@ -35,9 +35,15 @@ namespace TestsGeneratorLib
 
             TransformBlock<string, string> readBlock = new TransformBlock<string, string>(new Func<string, Task<string>>(AsyncReader.Read), readBlockOptions);
             TransformBlock<string, List<GeneratedTest>> processBlock = new TransformBlock<string, List<GeneratedTest>>(new Func<string, List<GeneratedTest>>(GenerateTestClasses), processBlockOptions);
-            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>(((generatedClasses) => AsyncWriter.Write("",generatedClasses).Wait()), writeBlockOptions);
-            
+            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>(((generatedClasses) => AsyncWriter.Write("D:\\files\\Tests", generatedClasses).Wait()), writeBlockOptions);
 
+            readBlock.LinkTo(processBlock, linkOptions);
+            processBlock.LinkTo(writeBlock, linkOptions);
+
+            readBlock.SendAsync(path);
+            readBlock.Complete();
+
+            return writeBlock.Completion;
         }
 
         private List<GeneratedTest> GenerateTestClasses(string sourceCode)

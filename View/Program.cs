@@ -19,7 +19,7 @@ namespace View
             TestsGenerator generator = new TestsGenerator(config);
 
             generator.Generate(path).Wait();
-
+            Console.WriteLine("Complete");
         }
     }
 }

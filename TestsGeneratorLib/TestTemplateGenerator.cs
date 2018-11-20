@@ -49,7 +49,7 @@ namespace TestsGeneratorLib
 
         private SyntaxList<UsingDirectiveSyntax> GetUsingDeclarations(ClassInfo classInfo)
         {
-            SyntaxList<UsingDirectiveSyntax> usings = new SyntaxList<UsingDirectiveSyntax>();
+            List<UsingDirectiveSyntax> usings = new List<UsingDirectiveSyntax>();
 
             usings.Add(UsingDirective(IdentifierName("System")));
             usings.Add(UsingDirective(IdentifierName("System.Collections.Generic")));
@@ -58,7 +58,7 @@ namespace TestsGeneratorLib
             usings.Add(UsingDirective(IdentifierName("Microsoft.VisualStudio.TestTools.UnitTesting")));
             usings.Add(UsingDirective(IdentifierName(classInfo.NamespaceName)));
 
-            return usings;
+            return new SyntaxList<UsingDirectiveSyntax>(usings);
         }
 
         private AttributeListSyntax GetAttributesDeclarations(string identifier)
@@ -73,13 +73,13 @@ namespace TestsGeneratorLib
 
         private SyntaxList<MemberDeclarationSyntax> GetMembersDeclarations(ClassInfo classInfo)
         {
-            SyntaxList<MemberDeclarationSyntax> methods = new SyntaxList<MemberDeclarationSyntax>();
+            List<MemberDeclarationSyntax> methods = new List<MemberDeclarationSyntax>();
 
             foreach (MethodInfo method in classInfo.Methods)
             {
                 methods.Add(GetMethodDeclaration(method));
             }
-            return methods;
+            return new SyntaxList<MemberDeclarationSyntax>(methods);
         }
 
         private MethodDeclarationSyntax GetMethodDeclaration(MethodInfo method)
@@ -96,7 +96,7 @@ namespace TestsGeneratorLib
             methodDeclaration = MethodDeclaration(
                 PredefinedType(
                     Token(SyntaxKind.VoidKeyword)),
-                Identifier(method.Name))
+                Identifier(method.Name+"Test"))
                 .WithAttributeLists(
                     SingletonList<AttributeListSyntax>(
                         AttributeList(
