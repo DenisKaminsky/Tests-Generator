@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestsGeneratorLib;
 
 namespace View
@@ -22,7 +19,7 @@ namespace View
             TestsGeneratorConfig config = new TestsGeneratorConfig(readingLimit, processingLimit, writingLimit);
             TestsGenerator generator = new TestsGenerator(config);
 
-            generator.Generate(pathes).Wait();
+            generator.Generate(pathes,"D:\\files\\Tests").Wait();
             Console.WriteLine("Complete");
         }
     }

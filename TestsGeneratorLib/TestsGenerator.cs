@@ -17,7 +17,7 @@ namespace TestsGeneratorLib
             _config = config;
         }
 
-        public Task Generate(List<string> pathes)
+        public Task Generate(List<string> pathes,string destination)
         {
             DataflowLinkOptions linkOptions = new DataflowLinkOptions { PropagateCompletion = true };//цель получает уведомление о завершении/сбое
             ExecutionDataflowBlockOptions readBlockOptions = new ExecutionDataflowBlockOptions
@@ -35,7 +35,7 @@ namespace TestsGeneratorLib
 
             TransformBlock<string, string> readBlock = new TransformBlock<string, string>(new Func<string, Task<string>>(AsyncReader.Read), readBlockOptions);
             TransformBlock<string, List<GeneratedTest>> processBlock = new TransformBlock<string, List<GeneratedTest>>(new Func<string, List<GeneratedTest>>(GenerateTestClasses), processBlockOptions);
-            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>(((generatedClasses) => AsyncWriter.Write("D:\\files\\Tests", generatedClasses).Wait()), writeBlockOptions);
+            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>(((generatedClasses) => AsyncWriter.Write(destination, generatedClasses).Wait()), writeBlockOptions);
 
             readBlock.LinkTo(processBlock, linkOptions);
             processBlock.LinkTo(writeBlock, linkOptions);
