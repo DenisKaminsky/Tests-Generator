@@ -83,6 +83,28 @@ namespace TestsGeneratorLib
 
         private MethodDeclarationSyntax GetMethodDeclaration(MethodInfo method)
         {
+            List<StatementSyntax> bodyMembers = new List<StatementSyntax>();
+            List<ArgumentSyntax> bodyMembersArgs = new List<ArgumentSyntax>();
+
+            bodyMembers.Add(
+                ExpressionStatement(
+                    InvocationExpression(
+                        GetAssertFail())
+                    .WithArgumentList(GetMemberArgs())));                        
+        }
+
+        private MemberAccessExpressionSyntax GetAssertFail()
+        {
+            MemberAccessExpressionSyntax assertFail = MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                IdentifierName("Assert"),
+                IdentifierName("Fail"));
+
+            return assertFail;
+        }
+
+        private ArgumentListSyntax GetMemberArgs()
+        {
 
         }
     }
