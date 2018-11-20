@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -15,6 +11,7 @@ namespace TestsGeneratorLib
     {
         public List<GeneratedTest> GetTestTemplates(ParsingResultStructure parsingResult)
         {
+            string fileName, content;
             List<GeneratedTest> generationResult = new List<GeneratedTest>();
 
             foreach (ClassInfo classInfo in parsingResult.Classes)
@@ -34,7 +31,10 @@ namespace TestsGeneratorLib
                         )
                      );
 
-                                    
+                fileName = classInfo.Name+"Test.cs";
+                content = unit.NormalizeWhitespace().ToFullString();
+
+                generationResult.Add(new GeneratedTest(fileName, content));
             }
             return generationResult;
         }

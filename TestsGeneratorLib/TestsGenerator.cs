@@ -34,16 +34,21 @@ namespace TestsGeneratorLib
             };
 
             TransformBlock<string, string> readBlock = new TransformBlock<string, string>(new Func<string, Task<string>>(AsyncReader.Read), readBlockOptions);
-            TransformBlock<string, GeneratedTest> processBlock = new TransformBlock<string, GeneratedTest>(new Func<string, GeneratedTest>(GenerateTestClass), processBlockOptions);
-            //ActionBlock<> writeBlock;
+            TransformBlock<string, List<GeneratedTest>> processBlock = new TransformBlock<string, List<GeneratedTest>>(new Func<string, List<GeneratedTest>>(GenerateTestClasses), processBlockOptions);
+            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>(((generatedClasses) => AsyncWriter.Write("",generatedClasses).Wait()), writeBlockOptions);
+            
 
         }
 
-        private GeneratedTest GenerateTestClass(string sourceCode)
+        private List<GeneratedTest> GenerateTestClasses(string sourceCode)
         {
             ParsingResultBuilder builder = new ParsingResultBuilder();
             ParsingResultStructure result = builder.GetResult(sourceCode);
             //here we can genearte test class with result
+            TestTemplateGenerator generator = new TestTemplateGenerator();
+            List<GeneratedTest> generatedTests = generator.GetTestTemplates(result);
+
+            return generatedTests;
         }
 
     }
