@@ -14,7 +14,7 @@ namespace View
             int readingLimit = 3;
             int writingLimit = 3;
             int processingLimit = 8;
-            string path = @"C:\Users\Денис\Documents\GitHub\Tests-Generator\View\BaseGenerator.cs";
+            string path = @"D:\files\BaseGenerator.cs";
             TestsGeneratorConfig config = new TestsGeneratorConfig(readingLimit, processingLimit, writingLimit);
             TestsGenerator generator = new TestsGenerator(config);
 

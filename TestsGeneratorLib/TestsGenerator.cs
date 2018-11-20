@@ -34,12 +34,12 @@ namespace TestsGeneratorLib
             };
 
             TransformBlock<string, string> readBlock = new TransformBlock<string, string>(new Func<string, Task<string>>(AsyncReader.Read), readBlockOptions);
-            //TransformBlock<> processBlock;
+            TransformBlock<string, GeneratedTest> processBlock = new TransformBlock<string, GeneratedTest>(new Func<string, GeneratedTest>(GenerateTestClass), processBlockOptions);
             //ActionBlock<> writeBlock;
 
         }
 
-        private void GenerateTestClass(string sourceCode)
+        private GeneratedTest GenerateTestClass(string sourceCode)
         {
             ParsingResultBuilder builder = new ParsingResultBuilder();
             ParsingResultStructure result = builder.GetResult(sourceCode);
