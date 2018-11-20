@@ -7,7 +7,7 @@ namespace TestsGeneratorLib.DataStructures
         private string _name;
         private string _namespaceName;
 
-        public List<MethodInfo> methods { get; }
+        public List<MethodInfo> Methods { get; }
 
         public string Name
         {
@@ -23,7 +23,7 @@ namespace TestsGeneratorLib.DataStructures
         {
             _name = className;
             _namespaceName = namespaceName;
-            this.methods = methods;
+            this.Methods = methods;
         }
     }
 }

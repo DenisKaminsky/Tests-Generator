@@ -54,5 +54,18 @@ namespace TestsGeneratorLib
 
             return usings;
         }
+
+        private SyntaxList<MemberDeclarationSyntax> GetMembersDeclarations(ClassInfo classInfo)
+        {
+            SyntaxList<MemberDeclarationSyntax> methods = new SyntaxList<MemberDeclarationSyntax>();
+
+            foreach (MethodInfo method in classInfo.Methods)
+            {
+                methods.Add();
+            }
+            return methods;
+        }
+
+        private 
     }
 }
