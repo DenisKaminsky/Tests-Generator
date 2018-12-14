@@ -31,7 +31,7 @@ namespace TestsGeneratorLib
                         )
                      );
 
-                fileName = classInfo.Name+"Test.cs";
+                fileName = classInfo.Name+"Test.dat";
                 content = unit.NormalizeWhitespace().ToFullString();
 
                 generationResult.Add(new GeneratedTest(fileName, content));

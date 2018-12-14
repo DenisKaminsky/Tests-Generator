@@ -15,36 +15,36 @@ namespace TestsGeneratorLib
             _config = config;
         }
 
-        public Task Generate(List<string> pathes,string destination)
+        public async Task Generate(List<string> pathes, string destination)
         {
             DataflowLinkOptions linkOptions = new DataflowLinkOptions { PropagateCompletion = true };//цель получает уведомление о завершении/сбое
             ExecutionDataflowBlockOptions readBlockOptions = new ExecutionDataflowBlockOptions
             {
-                MaxDegreeOfParallelism = _config._maxReadTasksCount
+                MaxDegreeOfParallelism = _config.MaxReadTasksCount
             };
             ExecutionDataflowBlockOptions processBlockOptions = new ExecutionDataflowBlockOptions
             {
-                MaxDegreeOfParallelism = _config._maxProcessingTasksCount
+                MaxDegreeOfParallelism = _config.MaxProcessingTasksCount
             };
             ExecutionDataflowBlockOptions writeBlockOptions = new ExecutionDataflowBlockOptions
             {
-                MaxDegreeOfParallelism = _config._maxWriteTasksCount
+                MaxDegreeOfParallelism = _config.MaxWriteTasksCount
             };
 
-            TransformBlock<string, string> readBlock = new TransformBlock<string, string>(new Func<string, Task<string>>(AsyncReader.Read), readBlockOptions);
-            TransformBlock<string, List<GeneratedTest>> processBlock = new TransformBlock<string, List<GeneratedTest>>(new Func<string, List<GeneratedTest>>(GenerateTestClasses), processBlockOptions);
-            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>(((generatedClasses) => AsyncWriter.Write(destination, generatedClasses).Wait()), writeBlockOptions);
+            TransformBlock<string, string> readBlock = new TransformBlock<string, string>(fileName => AsyncReader.Read(fileName), readBlockOptions);
+            TransformBlock<string, List<GeneratedTest>> processBlock = new TransformBlock<string, List<GeneratedTest>>(sourceCode => GenerateTestClasses(sourceCode), processBlockOptions);
+            ActionBlock<List<GeneratedTest>> writeBlock = new ActionBlock<List<GeneratedTest>>((generatedClasses => AsyncWriter.Write(destination, generatedClasses)), writeBlockOptions);
 
             readBlock.LinkTo(processBlock, linkOptions);
             processBlock.LinkTo(writeBlock, linkOptions);
 
             foreach (string path in pathes)
             {
-                readBlock.SendAsync(path);
+                await readBlock.SendAsync(path);
             }
             readBlock.Complete();
 
-            return writeBlock.Completion;
+            await writeBlock.Completion;
         }
 
         private List<GeneratedTest> GenerateTestClasses(string sourceCode)

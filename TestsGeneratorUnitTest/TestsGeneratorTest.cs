@@ -19,17 +19,18 @@ namespace TestsGeneratorUnitTest
         {
             int readingLimit = 3, writingLimit = 3, processingLimit = 8;
             string sourceCode;
+            string workPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\TestsFilesForTesting\\";
             SyntaxTree codeTree;
             List<string> pathes = new List<string>();
             TestsGeneratorConfig config;
             TestsGenerator generator;
 
-            pathes.Add(@"D:\files\TestsGenerator.cs");
+            pathes.Add(workPath+"TestsGenerator.cs");
             config = new TestsGeneratorConfig(readingLimit, processingLimit, writingLimit);
             generator = new TestsGenerator(config);
-            generator.Generate(pathes,"D:\\files\\Tests").Wait();
+            generator.Generate(pathes,workPath+ "GeneratedTests").Wait();
 
-            sourceCode = File.ReadAllText("D:\\files\\Tests\\TestsGeneratorTest.cs");
+            sourceCode = File.ReadAllText(workPath+ "GeneratedTests\\TestsGeneratorTest.dat");
             codeTree = CSharpSyntaxTree.ParseText(sourceCode);
             _root = codeTree.GetCompilationUnitRoot();
         }
@@ -90,8 +91,8 @@ namespace TestsGeneratorUnitTest
         public void AssertFailTest()
         {
             IEnumerable<MethodDeclarationSyntax> methods = _root.DescendantNodes().OfType<MethodDeclarationSyntax>();
-            int actual = methods.ElementAt<MethodDeclarationSyntax>(0).Body.Statements.OfType<ExpressionStatementSyntax>().Where((statement) => statement.ToString().Contains("Assert.Fail")).Count();
-            Assert.AreEqual(1, actual);
+            int actual = methods.ElementAt<MethodDeclarationSyntax>(0).Body.Statements.OfType<ExpressionStatementSyntax>().Where((statement) => statement.ToString().Contains("Assert.Fail")).Count(); 
+            Assert.AreEqual(1,actual);
         }
 
 

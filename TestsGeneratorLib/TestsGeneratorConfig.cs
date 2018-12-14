@@ -2,15 +2,15 @@
 {
     public class TestsGeneratorConfig
     {
-        public int _maxReadTasksCount { get; }
-        public int _maxProcessingTasksCount { get; }
-        public int _maxWriteTasksCount { get; }
+        public int MaxReadTasksCount { get; }
+        public int MaxProcessingTasksCount { get; }
+        public int MaxWriteTasksCount { get; }
 
         public TestsGeneratorConfig(int maxReadTasksCount,int maxProcessingTasksCount,int maxWriteTasksCount)
         {
-            _maxReadTasksCount = maxReadTasksCount;
-            _maxProcessingTasksCount = maxProcessingTasksCount;
-            _maxWriteTasksCount = maxWriteTasksCount;
+            MaxReadTasksCount = maxReadTasksCount;
+            MaxProcessingTasksCount = maxProcessingTasksCount;
+            MaxWriteTasksCount = maxWriteTasksCount;
         }
     }
 }

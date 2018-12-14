@@ -2,13 +2,9 @@
 {
     public class GeneratedTest
     {
-        private string _name;
         private string _content;
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string Name { get; }
 
         public string Content
         {
@@ -17,7 +13,7 @@
 
         public GeneratedTest(string name,string content)
         {
-            _name = name;
+            Name = name;
             _content = content;
         }
     }
